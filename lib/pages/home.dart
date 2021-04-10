@@ -21,37 +21,43 @@ class Home extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / 2,
                 child: Transform.translate(
                   offset: Offset(-30, -30),
-                  child: Image.asset('assets/background2.png'),
+                  child: Image.asset('assets/background.png'),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "LET'S BOOK A",
-                      style: getHeaderStyle(),
-                    ),
-                    Row(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: FittedBox(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "TRIP ",
-                          style: getHeaderStyle(
-                              fontColor: Colors.blue[100] as Color),
+                          "LET'S BOOK A",
+                          style: getHeaderStyle(),
                         ),
-                        Text(
-                          "TO ",
-                          style: getHeaderStyle(fontFamily: "CocoBiker"),
-                        ),
-                        Text(
-                          "MARS",
-                          style: getHeaderStyle(
-                              fontColor: Colors.orange[800] as Color),
+                        Row(
+                          children: [
+                            Text(
+                              "TRIP ",
+                              style: getHeaderStyle(
+                                  fontColor: Colors.blue[100] as Color),
+                            ),
+                            Text(
+                              " TO ",
+                              style: getHeaderStyle(fontFamily: "CocoBiker"),
+                            ),
+                            Text(
+                              " MARS",
+                              style: getHeaderStyle(
+                                  fontColor: Colors.orange[800] as Color),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
