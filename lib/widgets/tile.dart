@@ -1,16 +1,81 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gadabout/constants.dart';
+import 'package:gadabout/widgets/badge.dart';
 
 class Tile extends StatelessWidget {
+  Tile({
+    required this.startDestination,
+    required this.endDestination,
+    required this.flightDuration,
+    required this.flightDistanceInMillionKms,
+  });
+
+  final String startDestination;
+  final String endDestination;
+  final int flightDuration;
+  final double flightDistanceInMillionKms;
+
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-        painter: TilePainter(),
-        child: Container(
-          width: 200.0,
-          height: 270.0,
-        ));
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: CustomPaint(
+            painter: TilePainter(),
+            child: Container(
+              width: 200.0,
+              height: 270.0,
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 0.3 * constraints.maxHeight),
+                      FittedBox(
+                        child: Text(
+                          "$startDestination - $endDestination",
+                          style: getRegularStyle(),
+                        ),
+                      ),
+                      SizedBox(height: 20.0),
+                      Text("FLIGHT DURATION",
+                          style: getRegularStyle(fontSize: 7.0)),
+                      SizedBox(height: 5.0),
+                      FittedBox(
+                        child: Text("$flightDuration DAYS",
+                            style: getRegularStyle()),
+                      ),
+                      SizedBox(height: 5.0),
+                      FittedBox(
+                        child: Text("$flightDistanceInMillionKms MILLION KM",
+                            style: getRegularStyle(
+                                fontSize: 10.0,
+                                fontColor: Colors.orange[800] as Color)),
+                      ),
+                      Badge(),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.topRight,
+          child: Transform.translate(
+            offset: Offset(0.0, -30.0),
+            child: Container(
+              height: 100.0,
+              child: Image.asset("assets/warship.png"),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
